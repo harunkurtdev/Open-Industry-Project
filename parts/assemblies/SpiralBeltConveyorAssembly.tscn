@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq8yhvn4kx2a5"]
+
+[ext_resource type="Script" path="res://src/ConveyorAssembly/spiral_belt_conveyor_assembly.gd" id="1_spiral_assembly"]
+[ext_resource type="PackedScene" uid="uid://crqn5m8yjx7vk" path="res://parts/SpiralBeltConveyor.tscn" id="2_spiral_scene"]
+
+[node name="SpiralBeltConveyorAssembly" type="Node3D" unique_id=360519521]
+process_mode = 3
+script = ExtResource("1_spiral_assembly")
+inner_radius = 1.0
+conveyor_width = 1.524
+height_per_revolution = 2.0
+num_revolutions = 1.0
+belt_color = Color(1, 1, 1, 1)
+belt_texture = 0
+speed = 2.0
+belt_physics_material = null
+enable_comms = false
+speed_tag_group_name = "TagGroup0"
+speed_tag_name = ""
+running_tag_group_name = "TagGroup0"
+running_tag_name = ""
+metadata/_edit_group_ = true
+metadata/hijack_scale = false
+
+[node name="SpiralConveyor" parent="." unique_id=2139835047 instance=ExtResource("2_spiral_scene")]
