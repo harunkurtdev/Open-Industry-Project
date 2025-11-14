@@ -30,6 +30,14 @@ Dynamic Devices
 
 https://github.com/Open-Industry-Project/Open-Industry-Project/assets/105675984/1e74dc9c-0613-43cf-a864-8fc78a2785ca
 
+Available Conveyor Types:
+- Belt Conveyors (horizontal)
+- Roller Conveyors (horizontal)
+- Curved Belt Conveyors
+- Curved Roller Conveyors
+- Vertical Belt Conveyors (moves items up/down)
+- Belt Spur Conveyors
+
 ## Getting Started
 
 It is recommended to download the latest package here: https://github.com/Open-Industry-Project/Open-Industry-Project/releases
