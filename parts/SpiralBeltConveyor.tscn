@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=4 uid="uid://bqw8x5y9k8m7h"]
+
+[ext_resource type="Script" path="res://src/Conveyor/spiral_belt_conveyor.gd" id="1_spiral"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_spiral"]
+friction = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_spiral"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_spiral"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_temp"]
+albedo_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="SpiralBeltConveyor" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_spiral")
+speed_tag_group_name = "TagGroup0"
+running_tag_group_name = "TagGroup0"
+metadata/hijack_scale = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_spiral")
+surface_material_override/0 = SubResource("StandardMaterial3D_temp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_spiral")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_spiral")
