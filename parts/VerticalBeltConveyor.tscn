@@ -1,0 +1,146 @@
+[gd_scene load_steps=13 format=4 uid="uid://bx5qr8tn7h8uw"]
+
+[ext_resource type="Script" path="res://src/Conveyor/vertical_belt_conveyor.gd" id="1_vertical"]
+[ext_resource type="Shader" uid="uid://bejqoybamob1y" path="res://assets/3DModels/Shaders/BeltShader.tres" id="2_7ui2k"]
+[ext_resource type="Shader" uid="uid://lg3xcvqgjhjj" path="res://assets/3DModels/Shaders/MetalShader.tres" id="3_ceo50"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vert"]
+friction = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_belt"]
+render_priority = 0
+shader = ExtResource("2_7ui2k")
+shader_parameter/ColorMix = Color(1, 1, 1, 1)
+shader_parameter/BlackTextureOn = true
+shader_parameter/Scale = 4.0
+shader_parameter/BeltPosition = 0.0
+shader_parameter/Invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal"]
+render_priority = 0
+shader = ExtResource("3_ceo50")
+shader_parameter/BeltPosition = 0.0
+shader_parameter/Invert = false
+shader_parameter/Scale = 4.0
+shader_parameter/Scale2 = 1.0
+shader_parameter/Color = Color(0.337255, 0.654902, 0.784314, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vertical"]
+_surfaces = [{
+"aabb": AABB(-1, -0.5, -0.25, 2, 1, 0.5),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAAGAAQAAAACAAYADAAGAAIADAANAAYABQADAAEABQAHAAMACQAAAAQACQAIAAAABQALAAoABQABAAsAAwAOAA8AAwAHAA4A"),
+"name": "BeltFront",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/v8AAAAA/v/+//7/AAAAAAAA/v/+/wAAAAAAAAAA/v8AAAAA/v8AAAAAAAAAAAAA//8AAAAAAAD9//7//v8AAAAA/f/+/wAAAAAAAAAA/f8AAAAA/f8AAA==")
+}, {
+"aabb": AABB(-1, -0.5, -0.21, 2, 1, 0.42),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("HQABABoAHQACAAEAFwAEABAAFwAHAAQAAQADAAAAAQACAAMACgAcABsACgALABwABAAGAAUABAAHAAYAEgANAAwAEgAVAA0AGQADAB4AGQAAAAMAEwAGABQAEwAFAAYAEAAWABcAEAARABYAEgAUABUAEgATABQADwAWABEADwAOABYAGgAcAB0AGgAbABwAGAAeAB8AGAAZAB4AGAAIAAkAGAAfAAgA"),
+"name": "BeltSide",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("AACL6wAAAAAAmSQAAP//mSQAAP//i+sAAP//mSQAAP//i+sAAAAAmSSY+QAAAABl2wAA//9l2wAA//+ZJJj5AAAAAJkkAAAA//8AAAAAAP//AAAAAAAAAAD//wAAAAAAAAD+////AAAAAP7///8AAAAAAAD+/wAAAAD+/5kkAAD//2kYAAD//5XnAAD//2XbAABl2wAAlecAAGkYAACZJAAAleduAACZJP//AABl2wAAaRgAAP//mSQAAGXbjwIAAAAAmSSPAgAAAABpGAAAAAD//2kYAAAAAP//mSSPAgAAAABl248CAACV5wAAAAA=")
+}, {
+"aabb": AABB(-1, -0.5, -0.25, 2, 1, 0.5),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("FQAEAAYAEQAhACAAFQARAAQAHAAVAB0ADgAVABwAFQAhABEAFQAIACEADgAIABUACQAjACIADgAJAAgAHgAPAB8ADwAJAA4ACQASACMAEgAHAAUAFgAPAB4AEgAWAAcADwASAAkAEgAPABYAAAAUAAIAFAAbABoAFAANABsAEAAUAAAAJgAQACcACwAQACYAEAANABQADAAZABgAEAAMAA0ACwAMABAADAAXABkAFwABAAMAEwAlACQAFwATAAEACwAXAAwAEwAKACUACgAXAAsAFwAKABMA"),
+"name": "BeltSide2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("/v8AAAAA/v/+//7/AAAAAAAA/v/+/wAAAAAAAAAA/v8AAAAA/v8AAAAAAAAAAD//AAAAAAAAAAAAAAD+/zIzAAD+/8rMAAD+/8rMAAD+/zIzAAD+/zIzmPkAysyY+QAAysyY+QAAMjOY+QAA/v+L6wAAAACL6wAAAHIUAAD+/3IUAAD+/4vr//8AAIvr//8AAHIU/v8AAHIU/v8AAP7/MjNv/QAA/v/1KP7/AAD+/wjX//8AAMrMb/0AAMrMb/0AAAT3/v8AAPUo/v8AADIzb/0AAATY////AADKzI8CAAAAMjOPAgAA9SgAAP7/9SgAAP7/MjOPAgAAysyPAgAABNj//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vertical_main"]
+_surfaces = [{
+"aabb": AABB(-1, -0.5, -0.25, 2, 1, 0.5),
+"attribute_data": PackedByteArray("AID/f/9//3//f///AID+/8z8/3/M/P9/zPz//8z8/v8AgP7//3////9//38AgP9/zPz+/8z8///M/P9/zPz/f858/3/OfP7/znz/f858/v/+//9////+//7//3/+//7/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AQANAAkAAQAFAA0AFAAMAAQAFAAVAAwACgAGAAIACgAOAAYAEQAAAAgAEQAQAAAACwATABIACwADABMABwAWABcABwAPABYA"),
+"material": SubResource("ShaderMaterial_belt"),
+"name": "BeltFront",
+"primitive": 3,
+"uv_scale": Vector4(2.05123, 2, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/v8AAAAA/v8AAAAA//9U1QAAAFT///8AAABU1f//AAAAAAAA////AAAA//+//v8AAP7/v///AAAAAAD+/1TVAAAAVNUAAAAAAAAAVNUAAAADwP//AAAA//+//wAAAP//v1TV/v9U1f//AAD+/1TV//8AAP7/v/7/AAA=")
+}, {
+"aabb": AABB(-1, -0.5, -0.21, 2, 1, 0.42),
+"attribute_data": PackedByteArray("/v8dW/7/HVv+/+Sn/v/kpxIA5KcSAOSnEgAdWxIAHVv+/+Sn/v/kp/7/HVv+/x1bEgAdWxIAHVsSAOSnEgDkpxIA8kH+//JB/v8QwRIAEMH+//JBEgDyQRIAEMH+/xDB/v+Sr/7/kq/+/8+2/v/Ptv7/M0z+/zNM/v9wU/7/cFMSAHBTEgBwUxIAM0wSADNMEgDPthIAz7YSAJKvEgCSr/7/M0z+/zNM/v9wU/7/cFP+/5Kv/v+Sr/7/z7b+/8+2EgDPthIAz7YSAJKvEgCSrxIAcFMSAHBTEgAzTBIAM0w="),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("MwADAC0AMwAFAAMAJwAJABkAJwAPAAkAAgAHAAEAAgAEAAcAEgAwAC4AEgATADAACAANAAsACAAOAA0AHQAVABQAHQAjABUAKgAGADQAKgAAAAYAHgAMACAAHgAKAAwAGAAlACYAGAAbACUAHAAhACIAHAAfACEAFwAkABoAFwAWACQALAAxADIALAAvADEAKAA1ADYAKAArADUAKQAQABEAKQA3ABAA"),
+"material": SubResource("ShaderMaterial_metal"),
+"name": "BeltSide",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("AACL6wAA//9l2wAAi+sAAP//Zdv//5kkAAD//5kkZgb//2XbZgb//5kkmPn//2XbmPkAAGXbmPkAAJkkmPkAAAAA//8AAP//AAD//////wAA////AAD+////AAAAAP7///8AAAD+/wAAVNX+/wAA/v9U1ZkkAABU1f//aRhU1f//lef//2XbAABl2wAAlecAAGkY//+ZJAAAlecAAJkk//8AAGXbAABpGP//mSQAAGXbjwL//2XbVNWZJI8C//+ZJP//aRj//2kY//+ZJI8C//9l248CAABl2wAAlecAAAAA")
+}, {
+"aabb": AABB(-1, -0.5, -0.25, 2, 1, 0.5),
+"attribute_data": PackedByteArray("+f/KzPn/+f8+M8rMPjP5/zQzPjMFAD4zNDP5/wUA+f/3KFw4QQpcONv6vfXb+gfXXDi99Vw4B9f3KNv6QQrb+vn/6dEVLj4zIwU+M/n/2/o+M+nRFS75/yMF+f8+M9v6SjW99T4zyfc+M/vUSjUH1/co7f0DK/n/NQj5/0EK7f0DKz4z9yhKNUEKSjU1CD4z+f/J9+39vfXt/QfX+f/71A=="),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("FQAEAAYAEQAhACAAFQARAAQAHAAVAB0ADgAVABwAFQAhABEAFQAIACEADgAIABUACQAjACIADgAJAAgAHgAPAB8ADwAJAA4ACQASACMAEgAHAAUAFgAPAB4AEgAWAAcADwASAAkAEgAPABYAAAAUAAIAFAAbABoAFAANABsAEAAUAAAAJgAQACcACwAQACYAEAANABQADAAZABgAEAAMAA0ACwAMABAADAAXABkAFwABAAMAEwAlACQAFwATAAEACwAXAAwAEwAKACUACgAXAAsAFwAKABMA"),
+"material": SubResource("ShaderMaterial_metal"),
+"name": "BeltSide2",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("/v8AAAAA/v8AAAAA//9U1QAAAFT///8AAABU1f//AAAAAAAA////AAAA//+//v8AAP7/v///AAAAAAD+/1TVAAAAVNUAAMrMAABU1TIzVNVU1TIzVNX+/8rMVNX+/zIzmPnAwMrMmPnAwDIzmPkAAMrMmPkAADIzmPn+/4vrAADAAABl2wAAVNVyFAAA/v9yFADAwP7/i+v//8AAAHIU/v+/v/7/i+v//1TVAAByFAAAVNX+/zIzVNX+//UoAgD+/wjXAkD+/8rMAADAAADKzAAA/v8I1wAA/v/1KP7/MjNV1QAACNgAAMrMjwJU1TIzjwL//9UoAgD+/9UoBEDAwDIzjwLAwMrMjwIAwMAI2AAAAEDAwA==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vertical")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_belt_override"]
+render_priority = 0
+shader = ExtResource("2_7ui2k")
+shader_parameter/ColorMix = Color(1, 1, 1, 1)
+shader_parameter/BlackTextureOn = true
+shader_parameter/Scale = 5.0
+shader_parameter/BeltPosition = 0.0
+shader_parameter/Invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal_override"]
+render_priority = 0
+shader = ExtResource("3_ceo50")
+shader_parameter/BeltPosition = 0.0
+shader_parameter/Invert = false
+shader_parameter/Scale = 4.0
+shader_parameter/Scale2 = 1.0
+shader_parameter/Color = Color(0.337255, 0.654902, 0.784314, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vertical"]
+resource_local_to_scene = true
+size = Vector3(1.524, 2.0, 0.5)
+
+[node name="VerticalConveyor" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_vertical")
+belt_physics_material = SubResource("PhysicsMaterial_vert")
+speed_tag_group_name = "TagGroup0"
+running_tag_group_name = "TagGroup0"
+size = Vector3(1.524, 2.0, 0.5)
+metadata/hijack_scale = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.762, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_vertical_main")
+surface_material_override/0 = SubResource("ShaderMaterial_belt_override")
+surface_material_override/1 = SubResource("ShaderMaterial_metal_override")
+surface_material_override/2 = SubResource("ShaderMaterial_metal_override")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_vert")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_vertical")
