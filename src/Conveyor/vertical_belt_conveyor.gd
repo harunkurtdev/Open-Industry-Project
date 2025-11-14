@@ -45,7 +45,6 @@ enum ConvTexture {
 @onready var _sb: StaticBody3D = get_node("StaticBody3D")
 @onready var _mesh: MeshInstance3D = get_node("MeshInstance3D")
 var _belt_material: Material
-var _metal_material: Material
 var _belt_position: float = 0.0
 var _register_speed_tag_ok: bool = false
 var _register_running_tag_ok: bool = false
@@ -175,15 +174,14 @@ func fix_material_overrides() -> void:
 	# This is necessary because the editor's duplication action will overwrite our materials after we've initialized them.
 	if _mesh.get_surface_override_material(0) != _belt_material:
 		_mesh.set_surface_override_material(0, _belt_material)
-	if _mesh.get_surface_override_material(1) != _metal_material:
-		_mesh.set_surface_override_material(1, _metal_material)
-	if _mesh.get_surface_override_material(2) != _metal_material:
-		_mesh.set_surface_override_material(2, _metal_material)
 
 
 func _setup_references() -> void:
-	_belt_material = _mesh.mesh.surface_get_material(0)
-	_metal_material = _mesh.mesh.surface_get_material(1)
+	# BoxMesh only has one surface, so we just use the belt material
+	if _mesh and _mesh.mesh:
+		_belt_material = _mesh.get_surface_override_material(0)
+		if not _belt_material:
+			_belt_material = _mesh.mesh.surface_get_material(0)
 
 	# Store original collision settings
 	if _sb:
@@ -192,11 +190,14 @@ func _setup_references() -> void:
 
 
 func _setup_materials() -> void:
-	_belt_material = _mesh.mesh.surface_get_material(0).duplicate() as Material
-	_metal_material = _mesh.mesh.surface_get_material(1).duplicate() as Material
-	_mesh.set_surface_override_material(0, _belt_material)
-	_mesh.set_surface_override_material(1, _metal_material)
-	_mesh.set_surface_override_material(2, _metal_material)
+	# Get existing material from the scene or create a default
+	if _mesh.get_surface_override_material(0):
+		_belt_material = _mesh.get_surface_override_material(0).duplicate() as Material
+	elif _mesh.mesh and _mesh.mesh.surface_get_material(0):
+		_belt_material = _mesh.mesh.surface_get_material(0).duplicate() as Material
+	
+	if _belt_material:
+		_mesh.set_surface_override_material(0, _belt_material)
 
 
 func _setup_collision_shape() -> void:
@@ -240,14 +241,6 @@ func _update_belt_material_scale() -> void:
 	fix_material_overrides()
 
 
-func _update_metal_material_scale() -> void:
-	if not _metal_material or not _mesh:
-		return
-	(_metal_material as ShaderMaterial).set_shader_parameter("Scale", _mesh.scale.y)
-	(_metal_material as ShaderMaterial).set_shader_parameter("Scale2", _mesh.scale.z)
-	fix_material_overrides()
-
-
 func _on_size_changed() -> void:
 	var width := size.x
 	var height := size.y
@@ -267,7 +260,6 @@ func _on_size_changed() -> void:
 	middle_collision_shape.size = Vector3(width, height, depth)
 
 	_update_belt_material_scale()
-	_update_metal_material_scale()
 
 	# Position the mesh and body at the center
 	var base_pos := Vector3(0, 0, 0)
