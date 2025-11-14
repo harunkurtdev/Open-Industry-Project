@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=4 uid="uid://crqn5m8yjx7vk"]
+
+[ext_resource type="Script" path="res://src/Conveyor/spiral_belt_conveyor.gd" id="1_spiral"]
+[ext_resource type="Shader" uid="uid://bejqoybamob1y" path="res://assets/3DModels/Shaders/BeltShader.tres" id="2_shader"]
+[ext_resource type="Shader" uid="uid://lg3xcvqgjhjj" path="res://assets/3DModels/Shaders/MetalShader.tres" id="3_metal"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_spiral"]
+friction = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_spiral"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_spiral"]
+
+[node name="SpiralBeltConveyor" type="Node3D" unique_id=676074512]
+process_mode = 1
+script = ExtResource("1_spiral")
+speed_tag_group_name = "TagGroup0"
+running_tag_group_name = "TagGroup0"
+metadata/hijack_scale = true
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=38115466]
+mesh = SubResource("ArrayMesh_spiral")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1497409147]
+physics_material_override = SubResource("PhysicsMaterial_spiral")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1600964595]
+shape = SubResource("ConcavePolygonShape3D_spiral")
